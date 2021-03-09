@@ -30,6 +30,9 @@
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.panelP = new System.Windows.Forms.Panel();
+            this.panelDFColor = new System.Windows.Forms.Panel();
+            this.panelFColor = new System.Windows.Forms.Panel();
             this.label16 = new System.Windows.Forms.Label();
             this.checkBoxDP = new System.Windows.Forms.CheckBox();
             this.checkBoxDF = new System.Windows.Forms.CheckBox();
@@ -64,8 +67,6 @@
             this.textBoxA = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.panelFColor = new System.Windows.Forms.Panel();
-            this.panelDFColor = new System.Windows.Forms.Panel();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -79,6 +80,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.panelP);
             this.groupBox1.Controls.Add(this.panelDFColor);
             this.groupBox1.Controls.Add(this.panelFColor);
             this.groupBox1.Controls.Add(this.label16);
@@ -121,6 +123,30 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Inputs";
             // 
+            // panelP
+            // 
+            this.panelP.BackColor = System.Drawing.Color.DarkGreen;
+            this.panelP.Location = new System.Drawing.Point(33, 443);
+            this.panelP.Name = "panelP";
+            this.panelP.Size = new System.Drawing.Size(28, 19);
+            this.panelP.TabIndex = 35;
+            // 
+            // panelDFColor
+            // 
+            this.panelDFColor.BackColor = System.Drawing.Color.DarkViolet;
+            this.panelDFColor.Location = new System.Drawing.Point(33, 495);
+            this.panelDFColor.Name = "panelDFColor";
+            this.panelDFColor.Size = new System.Drawing.Size(28, 19);
+            this.panelDFColor.TabIndex = 35;
+            // 
+            // panelFColor
+            // 
+            this.panelFColor.BackColor = System.Drawing.Color.Blue;
+            this.panelFColor.Location = new System.Drawing.Point(32, 418);
+            this.panelFColor.Name = "panelFColor";
+            this.panelFColor.Size = new System.Drawing.Size(28, 19);
+            this.panelFColor.TabIndex = 34;
+            // 
             // label16
             // 
             this.label16.AutoSize = true;
@@ -147,8 +173,6 @@
             // checkBoxDF
             // 
             this.checkBoxDF.AutoSize = true;
-            this.checkBoxDF.Checked = true;
-            this.checkBoxDF.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxDF.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBoxDF.Location = new System.Drawing.Point(66, 495);
             this.checkBoxDF.Name = "checkBoxDF";
@@ -171,6 +195,8 @@
             // checkBoxP
             // 
             this.checkBoxP.AutoSize = true;
+            this.checkBoxP.Checked = true;
+            this.checkBoxP.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxP.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBoxP.Location = new System.Drawing.Point(66, 443);
             this.checkBoxP.Name = "checkBoxP";
@@ -246,7 +272,7 @@
             this.textBoxN.Name = "textBoxN";
             this.textBoxN.Size = new System.Drawing.Size(100, 20);
             this.textBoxN.TabIndex = 22;
-            this.textBoxN.Text = "10,0";
+            this.textBoxN.Text = "3";
             // 
             // label11
             // 
@@ -400,7 +426,7 @@
             this.textBoxC.Name = "textBoxC";
             this.textBoxC.Size = new System.Drawing.Size(100, 20);
             this.textBoxC.TabIndex = 5;
-            this.textBoxC.Text = "-10,0";
+            this.textBoxC.Text = "-10";
             // 
             // label3
             // 
@@ -418,7 +444,7 @@
             this.textBoxB.Name = "textBoxB";
             this.textBoxB.Size = new System.Drawing.Size(100, 20);
             this.textBoxB.TabIndex = 3;
-            this.textBoxB.Text = "10,0";
+            this.textBoxB.Text = "10";
             // 
             // label2
             // 
@@ -436,7 +462,7 @@
             this.textBoxA.Name = "textBoxA";
             this.textBoxA.Size = new System.Drawing.Size(100, 20);
             this.textBoxA.TabIndex = 1;
-            this.textBoxA.Text = "-10,0";
+            this.textBoxA.Text = "-10";
             // 
             // label1
             // 
@@ -447,22 +473,6 @@
             this.label1.Size = new System.Drawing.Size(17, 16);
             this.label1.TabIndex = 0;
             this.label1.Text = "A";
-            // 
-            // panelFColor
-            // 
-            this.panelFColor.BackColor = System.Drawing.Color.Blue;
-            this.panelFColor.Location = new System.Drawing.Point(32, 418);
-            this.panelFColor.Name = "panelFColor";
-            this.panelFColor.Size = new System.Drawing.Size(28, 19);
-            this.panelFColor.TabIndex = 34;
-            // 
-            // panelDFColor
-            // 
-            this.panelDFColor.BackColor = System.Drawing.Color.Navy;
-            this.panelDFColor.Location = new System.Drawing.Point(33, 495);
-            this.panelDFColor.Name = "panelDFColor";
-            this.panelDFColor.Size = new System.Drawing.Size(28, 19);
-            this.panelDFColor.TabIndex = 35;
             // 
             // Form1
             // 
@@ -519,6 +529,7 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Panel panelDFColor;
         private System.Windows.Forms.Panel panelFColor;
+        private System.Windows.Forms.Panel panelP;
     }
 }
 
