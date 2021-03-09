@@ -64,6 +64,8 @@
             this.textBoxA = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.panelFColor = new System.Windows.Forms.Panel();
+            this.panelDFColor = new System.Windows.Forms.Panel();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -77,6 +79,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.panelDFColor);
+            this.groupBox1.Controls.Add(this.panelFColor);
             this.groupBox1.Controls.Add(this.label16);
             this.groupBox1.Controls.Add(this.checkBoxDP);
             this.groupBox1.Controls.Add(this.checkBoxDF);
@@ -143,6 +147,8 @@
             // checkBoxDF
             // 
             this.checkBoxDF.AutoSize = true;
+            this.checkBoxDF.Checked = true;
+            this.checkBoxDF.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxDF.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBoxDF.Location = new System.Drawing.Point(66, 495);
             this.checkBoxDF.Name = "checkBoxDF";
@@ -442,6 +448,22 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "A";
             // 
+            // panelFColor
+            // 
+            this.panelFColor.BackColor = System.Drawing.Color.Blue;
+            this.panelFColor.Location = new System.Drawing.Point(32, 418);
+            this.panelFColor.Name = "panelFColor";
+            this.panelFColor.Size = new System.Drawing.Size(28, 19);
+            this.panelFColor.TabIndex = 34;
+            // 
+            // panelDFColor
+            // 
+            this.panelDFColor.BackColor = System.Drawing.Color.Navy;
+            this.panelDFColor.Location = new System.Drawing.Point(33, 495);
+            this.panelDFColor.Name = "panelDFColor";
+            this.panelDFColor.Size = new System.Drawing.Size(28, 19);
+            this.panelDFColor.TabIndex = 35;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -495,6 +517,8 @@
         private System.Windows.Forms.CheckBox checkBoxP;
         private System.Windows.Forms.CheckBox checkBoxF;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Panel panelDFColor;
+        private System.Windows.Forms.Panel panelFColor;
     }
 }
 

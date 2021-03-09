@@ -104,35 +104,58 @@ namespace CM_Laba1
 
         private decimal F(decimal x)
         {
-            return x * x;
+        
+            return (decimal)Math.Sin((double)x);
         }
 
         private void DrawF(Graphics g)
         {
-            Pen pen = new Pen(Color.Blue);
+            Pen pen = new Pen(panelFColor.BackColor, 3);
 
-            decimal delta = (B - A) / 10;
+            decimal delta = (B - A) / 1000;
             List<Point> points = new List<Point>();
-            for (decimal i = A; i <= B; i+=delta)
+            for (decimal x = A; x <= B; x+=delta)
             {
                 int x2, y2;
-                x2 = GetXPixel(i);
-                y2 = GetYPixel(F(i));
+                x2 = GetXPixel(x);
+                y2 = GetYPixel(F(x));
 
                 points.Add(new Point(x2, y2));
             }
 
-            g.DrawCurve(pen, points.ToArray());
+            g.DrawLines(pen, points.ToArray());
+        }
 
+        private void DrawDF(Graphics g)
+        {
+            Pen pen = new Pen(panelDFColor.BackColor,3);
+
+            decimal delta = (B - A) / 1000;
+            decimal h = (B - A) / 1000;
+            List<Point> points = new List<Point>();
+            for (decimal x = A; x <= B; x += delta)
+            {
+                int x2, y2;
+                x2 = GetXPixel(x);
+                decimal y = (F(x + h) - F(x - h))/(2*h);
+                y2 = GetYPixel(y);
+
+                points.Add(new Point(x2, y2));
+            }
+
+            g.DrawLines(pen, points.ToArray());
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
+            panel1.BackColor = Color.White;
             DrawAxises(e.Graphics);
 
             if(checkBoxF.Checked)
                 DrawF(e.Graphics);
 
+            if (checkBoxDF.Checked)
+                DrawDF(e.Graphics);
         }
 
         private void btnOK_Click(object sender, EventArgs e)
