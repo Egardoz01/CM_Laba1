@@ -42,9 +42,9 @@
             this.label13 = new System.Windows.Forms.Label();
             this.textBoxN = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.textBoxDeltaX = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.textBoxDeltaY = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.textBoxDeltaX = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.textBoxEpsilon = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -71,7 +71,7 @@
             // 
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(648, 648);
+            this.panel1.Size = new System.Drawing.Size(650, 650);
             this.panel1.TabIndex = 0;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
@@ -89,9 +89,9 @@
             this.groupBox1.Controls.Add(this.label13);
             this.groupBox1.Controls.Add(this.textBoxN);
             this.groupBox1.Controls.Add(this.label11);
-            this.groupBox1.Controls.Add(this.textBoxDeltaX);
-            this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.textBoxDeltaY);
+            this.groupBox1.Controls.Add(this.label10);
+            this.groupBox1.Controls.Add(this.textBoxDeltaX);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.textBoxEpsilon);
             this.groupBox1.Controls.Add(this.label5);
@@ -176,6 +176,8 @@
             // checkBoxF
             // 
             this.checkBoxF.AutoSize = true;
+            this.checkBoxF.Checked = true;
+            this.checkBoxF.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxF.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBoxF.Location = new System.Drawing.Point(66, 417);
             this.checkBoxF.Name = "checkBoxF";
@@ -250,13 +252,13 @@
             this.label11.TabIndex = 21;
             this.label11.Text = "N";
             // 
-            // textBoxDeltaX
+            // textBoxDeltaY
             // 
-            this.textBoxDeltaX.Location = new System.Drawing.Point(66, 347);
-            this.textBoxDeltaX.Name = "textBoxDeltaX";
-            this.textBoxDeltaX.Size = new System.Drawing.Size(100, 20);
-            this.textBoxDeltaX.TabIndex = 20;
-            this.textBoxDeltaX.Text = "1,0";
+            this.textBoxDeltaY.Location = new System.Drawing.Point(66, 347);
+            this.textBoxDeltaY.Name = "textBoxDeltaY";
+            this.textBoxDeltaY.Size = new System.Drawing.Size(100, 20);
+            this.textBoxDeltaY.TabIndex = 20;
+            this.textBoxDeltaY.Text = "1,0";
             // 
             // label10
             // 
@@ -268,13 +270,13 @@
             this.label10.TabIndex = 19;
             this.label10.Text = "ΔY";
             // 
-            // textBoxDeltaY
+            // textBoxDeltaX
             // 
-            this.textBoxDeltaY.Location = new System.Drawing.Point(66, 321);
-            this.textBoxDeltaY.Name = "textBoxDeltaY";
-            this.textBoxDeltaY.Size = new System.Drawing.Size(100, 20);
-            this.textBoxDeltaY.TabIndex = 18;
-            this.textBoxDeltaY.Text = "1,0";
+            this.textBoxDeltaX.Location = new System.Drawing.Point(66, 321);
+            this.textBoxDeltaX.Name = "textBoxDeltaX";
+            this.textBoxDeltaX.Size = new System.Drawing.Size(100, 20);
+            this.textBoxDeltaX.TabIndex = 18;
+            this.textBoxDeltaX.Text = "1,0";
             // 
             // label9
             // 
@@ -478,9 +480,9 @@
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.TextBox textBoxN;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox textBoxDeltaX;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox textBoxDeltaY;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox textBoxDeltaX;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label13;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
