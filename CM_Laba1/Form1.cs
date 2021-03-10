@@ -22,7 +22,8 @@ namespace CM_Laba1
         private int N;
         private decimal width;
         private decimal height;
-
+        private decimal alpha;
+        private decimal bettah;
         public Form1()
         {
             InitializeComponent();
@@ -125,7 +126,7 @@ namespace CM_Laba1
         private decimal F(decimal x)
         {
 
-            //return x*x;
+           // return x*x;
             return (decimal)Math.Sin((double)x);
         }
 
@@ -177,17 +178,25 @@ namespace CM_Laba1
                 return simDifs[poryadok][tochka];
             if (poryadok == 1)
             {
-                decimal h = (B - A) / (2 * N + 1);
-                simDifs[poryadok].Add(tochka, F(A + tochka*h/2 + h/2) - F(A + tochka * h / 2 - h / 2));
+                decimal h = (B - A) / (2 * N);
+                decimal x1 = A + (tochka+1) * h / 2;
+                decimal x2 = A + (tochka -1) * h / 2 ;
+                simDifs[poryadok].Add(tochka, F(x1) - F(x2));
                 return simDifs[poryadok][tochka];
             }
 
             decimal f1 = simmetrialDifference(poryadok - 1, tochka + 1);
             decimal f2 = simmetrialDifference(poryadok - 1, tochka - 1);
-           
-          
-            decimal f = f1 - f2;
-            simDifs[poryadok].Add(tochka, f);
+
+            try
+            {
+                decimal f = f1 - f2;
+                simDifs[poryadok].Add(tochka, f);
+            }
+            catch (OverflowException ex)
+            {
+                 simDifs[poryadok].Add(tochka, 1000000000);
+            }
            
             return simDifs[poryadok][tochka];
         }
@@ -196,15 +205,19 @@ namespace CM_Laba1
         {
             Pen pen = new Pen(panelP.BackColor, 3);
 
-            decimal delta = (B - A) / 100;
-            decimal h = (B - A) / (2*N+1);
+            simmetrialDifference(2,0);
 
-
+            decimal h = (B - A) / (2*N);
             List<Point> points = new List<Point>();
-            for (decimal t = 0; A+t*h<=B; t += delta)
+            for (int T = 0; T<= (2 * N) * 100; T++)
             {
+                decimal t =  T / 100.0m;
                 int x2, y2;
                 decimal x = A + h * t;
+                if (B==x)
+                {
+                    int a = 0;
+                }
                 decimal y = F(A);
                 decimal kek = t;
                 for (int i = 1; i <= 2 * N; i++)
@@ -214,13 +227,18 @@ namespace CM_Laba1
                     if (i % 2 == 1)
                     {
                         if(i>=3)
-                            kek *= (t * t - (i / 2)* (i / 2));
+                            kek *= (t * t - ((i-1) / 2)* ((i-1) / 2));
                         y += kek * d;
                     }
                     else
                     {
                         y += t * kek * d;
                     }
+
+                   // if (y > D + 100000)
+                  //      break;
+                  //  if (y < C - 100000)
+                      //  break;
                 }
                 x2 = GetXPixel(x);
               
