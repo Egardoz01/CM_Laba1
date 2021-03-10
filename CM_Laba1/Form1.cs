@@ -24,6 +24,8 @@ namespace CM_Laba1
         private decimal height;
         private decimal alpha;
         private decimal bettah;
+        private decimal gamma;
+        private decimal epsilon;
         public Form1()
         {
             InitializeComponent();
@@ -46,6 +48,10 @@ namespace CM_Laba1
                 height = panel1.Height-50;
                 width = panel1.Width-50;
 
+                alpha = decimal.Parse(textBoxAlpha.Text);
+                bettah = decimal.Parse(textBoxBetta.Text);
+                gamma = decimal.Parse(textBoxGamma.Text);
+                epsilon = decimal.Parse(textBoxEpsilon.Text);
                 if (A >= B)
                 {
                     MessageBox.Show("А должно быть < B");
@@ -89,8 +95,19 @@ namespace CM_Laba1
 
         private int GetYPixel(decimal y)
         {
-            y -= C;
-            return (int)height-(int)Math.Round(y * height / (D - C))+25;
+            try
+            {
+                y -= C;
+                return (int)height - (int)Math.Round(y * height / (D - C)) + 25;
+
+            }
+            catch (OverflowException ex)
+            {
+                if (y > 0)
+                    return -10000;
+                else
+                    return 10000;
+            }
 
         }
 
@@ -126,8 +143,16 @@ namespace CM_Laba1
         private decimal F(decimal x)
         {
 
-           // return x*x;
-            return (decimal)Math.Sin((double)x);
+            // return x*x;
+            //return (decimal)Math.Sin((double)x);
+            try
+            {
+                return alpha * (decimal)Math.Sin((double)(epsilon * x)) * (decimal)Math.Cos(Math.Tan((double)(bettah / (x - gamma))));
+            }
+            catch (DivideByZeroException ex)
+            {
+                return 100000000;
+            }
         }
 
         private void DrawF(Graphics g)
@@ -178,14 +203,15 @@ namespace CM_Laba1
                 return simDifs[poryadok][tochka];
             if (poryadok == 1)
             {
+                decimal a = (B + A) / 2;
                 decimal h = (B - A) / (2 * N);
-                decimal x1 = A + (tochka+1) * h / 2;
-                decimal x2 = A + (tochka -1) * h / 2 ;
+                decimal x1 = a + (tochka +1) * h / 2;
+                decimal x2 = a + (tochka - 1) * h / 2;
                 simDifs[poryadok].Add(tochka, F(x1) - F(x2));
                 return simDifs[poryadok][tochka];
             }
 
-            decimal f1 = simmetrialDifference(poryadok - 1, tochka + 1);
+            decimal f1 = simmetrialDifference(poryadok - 1, tochka+1);
             decimal f2 = simmetrialDifference(poryadok - 1, tochka - 1);
 
             try
@@ -208,30 +234,35 @@ namespace CM_Laba1
             simmetrialDifference(2,0);
 
             decimal h = (B - A) / (2*N);
+            decimal a = (B + A) / 2;
             List<Point> points = new List<Point>();
-            for (int T = 0; T<= (2 * N) * 100; T++)
+            for (decimal x = A; x<=B; x+=(B-A)/1000)
             {
-                decimal t =  T / 100.0m;
+                decimal t =  (x-a)/h;
                 int x2, y2;
-                decimal x = A + h * t;
                 if (B==x)
                 {
-                    int a = 0;
+                    int c = 0;
                 }
-                decimal y = F(A);
+                if (A == x)
+                {
+                    int c = 0;
+                }
+                decimal y = F(a);
                 decimal kek = t;
                 for (int i = 1; i <= 2 * N; i++)
                 {
                     kek /= i;
-                    decimal d = simmetrialDifference(i, 0);
+                    
                     if (i % 2 == 1)
                     {
                         if(i>=3)
                             kek *= (t * t - ((i-1) / 2)* ((i-1) / 2));
-                        y += kek * d;
+                        y += kek * (simmetrialDifference(i, 1) + simmetrialDifference(i, -1))/2;
                     }
                     else
                     {
+                        decimal d = simmetrialDifference(i, 0);
                         y += t * kek * d;
                     }
 
@@ -243,6 +274,10 @@ namespace CM_Laba1
                 x2 = GetXPixel(x);
               
                 y2 = GetYPixel(y);
+                if (y2 > 1000)
+                    y2 = 1000;
+                if (y2 < -1000)
+                    y2 = -1000;
                 points.Add(new Point(x2, y2));
             }
 

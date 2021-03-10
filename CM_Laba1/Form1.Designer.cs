@@ -326,7 +326,7 @@
             this.textBoxEpsilon.Name = "textBoxEpsilon";
             this.textBoxEpsilon.Size = new System.Drawing.Size(100, 20);
             this.textBoxEpsilon.TabIndex = 16;
-            this.textBoxEpsilon.Text = "10,0";
+            this.textBoxEpsilon.Text = "1";
             // 
             // label5
             // 
@@ -344,7 +344,7 @@
             this.textBoxGamma.Name = "textBoxGamma";
             this.textBoxGamma.Size = new System.Drawing.Size(100, 20);
             this.textBoxGamma.TabIndex = 14;
-            this.textBoxGamma.Text = "10,0";
+            this.textBoxGamma.Text = "1";
             // 
             // label6
             // 
@@ -362,7 +362,7 @@
             this.textBoxBetta.Name = "textBoxBetta";
             this.textBoxBetta.Size = new System.Drawing.Size(100, 20);
             this.textBoxBetta.TabIndex = 12;
-            this.textBoxBetta.Text = "10,0";
+            this.textBoxBetta.Text = "1";
             // 
             // label7
             // 
@@ -380,7 +380,7 @@
             this.textBoxAlpha.Name = "textBoxAlpha";
             this.textBoxAlpha.Size = new System.Drawing.Size(100, 20);
             this.textBoxAlpha.TabIndex = 10;
-            this.textBoxAlpha.Text = "10,0";
+            this.textBoxAlpha.Text = "1";
             // 
             // label8
             // 
@@ -408,7 +408,7 @@
             this.textBoxD.Name = "textBoxD";
             this.textBoxD.Size = new System.Drawing.Size(100, 20);
             this.textBoxD.TabIndex = 7;
-            this.textBoxD.Text = "10,0";
+            this.textBoxD.Text = "3";
             // 
             // label4
             // 
@@ -426,7 +426,7 @@
             this.textBoxC.Name = "textBoxC";
             this.textBoxC.Size = new System.Drawing.Size(100, 20);
             this.textBoxC.TabIndex = 5;
-            this.textBoxC.Text = "-10";
+            this.textBoxC.Text = "-3";
             // 
             // label3
             // 
@@ -444,7 +444,7 @@
             this.textBoxB.Name = "textBoxB";
             this.textBoxB.Size = new System.Drawing.Size(100, 20);
             this.textBoxB.TabIndex = 3;
-            this.textBoxB.Text = "10";
+            this.textBoxB.Text = "3";
             // 
             // label2
             // 
@@ -462,7 +462,7 @@
             this.textBoxA.Name = "textBoxA";
             this.textBoxA.Size = new System.Drawing.Size(100, 20);
             this.textBoxA.TabIndex = 1;
-            this.textBoxA.Text = "0";
+            this.textBoxA.Text = "-3";
             // 
             // label1
             // 
