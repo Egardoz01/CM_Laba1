@@ -155,11 +155,11 @@ namespace CM_Laba1
             }
             catch (DivideByZeroException ex)
             {
-                return 100000000;
+                return 0;
             }
             catch (OverflowException ex)
             {
-                return 100000000;
+                return 0;
             }
         }
 
@@ -283,17 +283,23 @@ namespace CM_Laba1
             for (int i = 1; i <= 2 * N; i++)
             {
                 kek /= i;
-
-                if (i % 2 == 1)
+                try
                 {
-                    if (i >= 3)
-                        kek *= (t * t - ((i - 1) / 2) * ((i - 1) / 2));
-                    y += kek * (simmetrialDifference(i, 1) + simmetrialDifference(i, -1)) / 2;
+                    if (i % 2 == 1)
+                    {
+                        if (i >= 3)
+                            kek *= (t * t - ((i - 1) / 2) * ((i - 1) / 2));
+                        y += kek * (simmetrialDifference(i, 1) + simmetrialDifference(i, -1)) / 2;
+                    }
+                    else
+                    {
+                        decimal d = simmetrialDifference(i, 0);
+                        y += t * kek * d;
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    decimal d = simmetrialDifference(i, 0);
-                    y += t * kek * d;
+                    return y;
                 }
             }
 
