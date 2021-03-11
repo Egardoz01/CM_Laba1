@@ -26,12 +26,12 @@ namespace CM_Laba1
         private decimal bettah;
         private decimal gamma;
         private decimal epsilon;
+        private decimal delta;
         public Form1()
         {
             InitializeComponent();
+            comboBoxDelta.SelectedIndex = 0;
             ParseData();
-
-           
         }
        
         private bool ParseData()
@@ -43,8 +43,8 @@ namespace CM_Laba1
                 C = decimal.Parse(textBoxC.Text);
                 D = decimal.Parse(textBoxD.Text);
                 N = int.Parse(textBoxN.Text);
-                deltaX = decimal.Parse(textBoxDeltaY.Text);
-                deltaY = decimal.Parse(textBoxDeltaX.Text);
+                deltaX = decimal.Parse(textBoxDeltaX.Text);
+                deltaY = decimal.Parse(textBoxDeltaY.Text);
                 height = panel1.Height-50;
                 width = panel1.Width-50;
 
@@ -52,6 +52,9 @@ namespace CM_Laba1
                 bettah = decimal.Parse(textBoxBetta.Text);
                 gamma = decimal.Parse(textBoxGamma.Text);
                 epsilon = decimal.Parse(textBoxEpsilon.Text);
+
+                delta = decimal.Parse(comboBoxDelta.Text);
+
                 if (A >= B)
                 {
                     MessageBox.Show("А должно быть < B");
@@ -95,25 +98,26 @@ namespace CM_Laba1
 
         private int GetYPixel(decimal y)
         {
-            try
-            {
-                y -= C;
-                return (int)height - (int)Math.Round(y * height / (D - C)) + 25;
+            if (y > D)
+                y =  D + 100;
+            if(y<C)
+                y =  C - 100;
 
-            }
-            catch (OverflowException ex)
-            {
-                if (y > 0)
-                    return -10000;
-                else
-                    return 10000;
-            }
+            y -= C;
+            int pixel = (int)height - (int)Math.Round(y * height / (D - C)) + 25;
+            return pixel;
 
         }
 
         private void DrawAxises(Graphics g)
         {
             Pen pen = new Pen(Color.Black);
+            Pen pen2 = new Pen(Color.Red,2);
+
+            g.DrawLine(pen2, GetXPixel(0), GetYPixel(C) + 25, GetXPixel(0), GetYPixel(D) - 25);
+            g.DrawLine(pen2, GetXPixel(A)-25, GetYPixel(0), GetXPixel(B)+25, GetYPixel(0));
+
+
             Font txtFont = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             Brush brush = new SolidBrush(Color.Black);
             for (decimal i = A; i < B; i+=deltaX)//Оси Y
@@ -153,23 +157,30 @@ namespace CM_Laba1
             {
                 return 100000000;
             }
+            catch (OverflowException ex)
+            {
+                return 100000000;
+            }
         }
 
         private void DrawF(Graphics g)
         {
-            Pen pen = new Pen(panelFColor.BackColor, 3);
+            Pen pen = new Pen(panelFColor.BackColor, 1);
 
-            decimal delta = (B - A) / 1000;
+            decimal delta = (B - A) / 10000;
             List<Point> points = new List<Point>();
 
-
+            int prevx=0, prevy=0;
             for (decimal x = A; x <= B; x+=delta)
             {
                 int x2, y2;
                 x2 = GetXPixel(x);
                 y2 = GetYPixel(F(x));
+                if(prevx!=x2 || prevy!=y2)
+                    points.Add(new Point(x2, y2));
 
-                points.Add(new Point(x2, y2));
+                prevy = y2;
+                prevx = x2;
             }
 
             g.DrawLines(pen, points.ToArray());
@@ -180,13 +191,34 @@ namespace CM_Laba1
             Pen pen = new Pen(panelDFColor.BackColor,3);
 
             decimal delta = (B - A) / 1000;
-            decimal h = (B - A) / 1000;
+            decimal h = this.delta;
             List<Point> points = new List<Point>();
             for (decimal x = A; x <= B; x += delta)
             {
                 int x2, y2;
                 x2 = GetXPixel(x);
                 decimal y = (F(x + h) - F(x - h))/(2*h);
+                y2 = GetYPixel(y);
+
+                points.Add(new Point(x2, y2));
+            }
+
+            g.DrawLines(pen, points.ToArray());
+        }
+
+
+        private void DrawDP(Graphics g)
+        {
+            Pen pen = new Pen(panelDP.BackColor, 3);
+
+            decimal delta = (B - A) / 1000;
+            decimal h = this.delta;
+            List<Point> points = new List<Point>();
+            for (decimal x = A; x <= B; x += delta)
+            {
+                int x2, y2;
+                x2 = GetXPixel(x);
+                decimal y = (P(x + h) - P(x - h)) / (2 * h);
                 y2 = GetYPixel(y);
 
                 points.Add(new Point(x2, y2));
@@ -207,7 +239,10 @@ namespace CM_Laba1
                 decimal h = (B - A) / (2 * N);
                 decimal x1 = a + (tochka +1) * h / 2;
                 decimal x2 = a + (tochka - 1) * h / 2;
-                simDifs[poryadok].Add(tochka, F(x1) - F(x2));
+                decimal y1 = F(x1);
+                decimal y2 = F(x2);
+                decimal dif = y1 - y2;
+                simDifs[poryadok].Add(tochka,dif);
                 return simDifs[poryadok][tochka];
             }
 
@@ -227,52 +262,73 @@ namespace CM_Laba1
             return simDifs[poryadok][tochka];
         }
 
+        private decimal P(decimal x)
+        {
+
+            decimal h = (B - A) / (2 * N);
+            decimal a = (B + A) / 2;
+
+            decimal t = (x - a) / h;
+
+            if (B == x)
+            {
+                int c = 0;
+            }
+            if (A == x)
+            {
+                int c = 0;
+            }
+            decimal y = F(a);
+            decimal kek = t;
+            for (int i = 1; i <= 2 * N; i++)
+            {
+                kek /= i;
+
+                if (i % 2 == 1)
+                {
+                    if (i >= 3)
+                        kek *= (t * t - ((i - 1) / 2) * ((i - 1) / 2));
+                    y += kek * (simmetrialDifference(i, 1) + simmetrialDifference(i, -1)) / 2;
+                }
+                else
+                {
+                    decimal d = simmetrialDifference(i, 0);
+                    y += t * kek * d;
+                }
+            }
+
+            return y;
+        }
+
         private void DrawP(Graphics g)
         {
             Pen pen = new Pen(panelP.BackColor, 3);
 
-            simmetrialDifference(2,0);
-
-            decimal h = (B - A) / (2*N);
-            decimal a = (B + A) / 2;
             List<Point> points = new List<Point>();
             for (decimal x = A; x<=B; x+=(B-A)/1000)
             {
-                decimal t =  (x-a)/h;
                 int x2, y2;
-                if (B==x)
-                {
-                    int c = 0;
-                }
-                if (A == x)
-                {
-                    int c = 0;
-                }
-                decimal y = F(a);
-                decimal kek = t;
-                for (int i = 1; i <= 2 * N; i++)
-                {
-                    kek /= i;
-                    
-                    if (i % 2 == 1)
-                    {
-                        if(i>=3)
-                            kek *= (t * t - ((i-1) / 2)* ((i-1) / 2));
-                        y += kek * (simmetrialDifference(i, 1) + simmetrialDifference(i, -1))/2;
-                    }
-                    else
-                    {
-                        decimal d = simmetrialDifference(i, 0);
-                        y += t * kek * d;
-                    }
 
-                   // if (y > D + 100000)
-                  //      break;
-                  //  if (y < C - 100000)
-                      //  break;
-                }
                 x2 = GetXPixel(x);
-              
+                decimal y = P(x);
+                y2 = GetYPixel(y);
+                points.Add(new Point(x2, y2));
+            }
+
+            g.DrawLines(pen, points.ToArray());
+        }
+
+        private void DrawR(Graphics g)
+        {
+            Pen pen = new Pen(panelRn.BackColor, 3);
+
+            List<Point> points = new List<Point>();
+            for (decimal x = A; x <= B; x += (B - A) / 1000)
+            {
+                int x2, y2;
+
+                x2 = GetXPixel(x);
+                decimal y = Math.Abs(P(x) - F(x));
                 y2 = GetYPixel(y);
                 if (y2 > 1000)
                     y2 = 1000;
@@ -281,10 +337,9 @@ namespace CM_Laba1
                 points.Add(new Point(x2, y2));
             }
 
+
             g.DrawLines(pen, points.ToArray());
         }
-
-
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
             panel1.BackColor = Color.White;
@@ -298,6 +353,12 @@ namespace CM_Laba1
 
             if(checkBoxP.Checked)
                 DrawP(e.Graphics);
+
+            if (checkBoxR.Checked)
+                DrawR(e.Graphics);
+
+            if (checkBoxDP.Checked)
+                DrawDP(e.Graphics);
         }
 
         private void btnOK_Click(object sender, EventArgs e)
