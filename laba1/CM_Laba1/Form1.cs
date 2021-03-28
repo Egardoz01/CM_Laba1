@@ -148,7 +148,7 @@ namespace CM_Laba1
         {
 
             // return x*x;
-            //return (decimal)Math.Sin((double)x);
+           // return (decimal)Math.Sin((double)x);
             try
             {
                 return alpha * (decimal)Math.Sin((double)(epsilon * x)) * (decimal)Math.Cos(Math.Tan((double)(bettah / (x - gamma))));
