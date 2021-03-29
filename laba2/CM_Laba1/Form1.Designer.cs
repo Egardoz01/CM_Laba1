@@ -30,6 +30,11 @@
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.comboBoxParam = new System.Windows.Forms.ComboBox();
             this.label16 = new System.Windows.Forms.Label();
             this.textBoxSmallB = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
@@ -65,11 +70,6 @@
             this.textBoxA = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.comboBoxParam = new System.Windows.Forms.ComboBox();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -128,6 +128,68 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Inputs";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.Location = new System.Drawing.Point(61, 567);
+            this.label23.MaximumSize = new System.Drawing.Size(150, 100);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(54, 16);
+            this.label23.TabIndex = 48;
+            this.label23.Text = "-Nmax=";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.Location = new System.Drawing.Point(37, 532);
+            this.label22.MaximumSize = new System.Drawing.Size(300, 100);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(237, 24);
+            this.label22.TabIndex = 47;
+            this.label22.Text = "F(x)=αSIN(εX)COS(tg(x-γ))";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.Location = new System.Drawing.Point(178, 31);
+            this.label21.MaximumSize = new System.Drawing.Size(150, 100);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(98, 32);
+            this.label21.TabIndex = 46;
+            this.label21.Text = "-Выделенный параметр";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.Location = new System.Drawing.Point(188, 479);
+            this.label20.MaximumSize = new System.Drawing.Size(150, 100);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(116, 32);
+            this.label20.TabIndex = 45;
+            this.label20.Text = "-Точность интегрирования";
+            // 
+            // comboBoxParam
+            // 
+            this.comboBoxParam.FormattingEnabled = true;
+            this.comboBoxParam.Items.AddRange(new object[] {
+            "α",
+            "β",
+            "γ",
+            "ε"});
+            this.comboBoxParam.Location = new System.Drawing.Point(66, 31);
+            this.comboBoxParam.Name = "comboBoxParam";
+            this.comboBoxParam.Size = new System.Drawing.Size(52, 21);
+            this.comboBoxParam.TabIndex = 44;
+            this.comboBoxParam.SelectedIndexChanged += new System.EventHandler(this.comboBoxParam_SelectedIndexChanged);
             // 
             // label16
             // 
@@ -256,7 +318,7 @@
             this.textBoxN.Name = "textBoxN";
             this.textBoxN.Size = new System.Drawing.Size(100, 20);
             this.textBoxN.TabIndex = 22;
-            this.textBoxN.Text = "20";
+            this.textBoxN.Text = "50";
             // 
             // label11
             // 
@@ -457,68 +519,6 @@
             this.label1.Size = new System.Drawing.Size(17, 16);
             this.label1.TabIndex = 0;
             this.label1.Text = "A";
-            // 
-            // comboBoxParam
-            // 
-            this.comboBoxParam.FormattingEnabled = true;
-            this.comboBoxParam.Items.AddRange(new object[] {
-            "α",
-            "β",
-            "γ",
-            "ε"});
-            this.comboBoxParam.Location = new System.Drawing.Point(66, 31);
-            this.comboBoxParam.Name = "comboBoxParam";
-            this.comboBoxParam.Size = new System.Drawing.Size(52, 21);
-            this.comboBoxParam.TabIndex = 44;
-            this.comboBoxParam.SelectedIndexChanged += new System.EventHandler(this.comboBoxParam_SelectedIndexChanged);
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label20.Location = new System.Drawing.Point(188, 479);
-            this.label20.MaximumSize = new System.Drawing.Size(150, 100);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(116, 32);
-            this.label20.TabIndex = 45;
-            this.label20.Text = "-Точность интегрирования";
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.Location = new System.Drawing.Point(178, 31);
-            this.label21.MaximumSize = new System.Drawing.Size(150, 100);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(98, 32);
-            this.label21.TabIndex = 46;
-            this.label21.Text = "-Выделенный параметр";
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.Location = new System.Drawing.Point(37, 532);
-            this.label22.MaximumSize = new System.Drawing.Size(300, 100);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(237, 24);
-            this.label22.TabIndex = 47;
-            this.label22.Text = "F(x)=αSIN(εX)COS(tg(x-γ))";
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label23.Location = new System.Drawing.Point(61, 567);
-            this.label23.MaximumSize = new System.Drawing.Size(150, 100);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(54, 16);
-            this.label23.TabIndex = 48;
-            this.label23.Text = "-Nmax=";
             // 
             // Form1
             // 

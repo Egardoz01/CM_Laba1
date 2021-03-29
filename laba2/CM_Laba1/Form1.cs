@@ -29,6 +29,8 @@ namespace CM_Laba1
         private decimal gamma;
         private decimal epsilon;
         private decimal delta;
+        private List<Point> points;
+        private bool new_data;
         public Form1()
         {
             InitializeComponent();
@@ -59,7 +61,8 @@ namespace CM_Laba1
                 epsilon = decimal.Parse(textBoxEpsilon.Text);
 
                 delta = decimal.Parse(comboBoxDelta.Text);
-
+                points = new List<Point>();
+                new_data = true;
                 if (A >= B)
                 {
                     MessageBox.Show("А должно быть < B");
@@ -151,6 +154,7 @@ namespace CM_Laba1
 
         private decimal F(decimal x)
         {
+          //  return F_Gleb(x);
             if (Math.Abs(x - gamma) < (decimal)0.00000001)
                 return 0;
             // return x*x;
@@ -169,39 +173,58 @@ namespace CM_Laba1
             }
         }
 
+        private decimal F_Gleb(decimal x)
+        {
+
+            return (decimal)(Math.Sin((double)x * (double)alpha));
+            try
+            {
+                return (decimal)((double)alpha * Math.Sin(Math.Pow(Math.Abs((double)x), (double)bettah)) + (double)gamma * (double)Math.Cos(Math.Tan((double)(1 * x))));
+            }
+            catch (OverflowException ex)
+            {
+                return 0;
+            }
+        }
+
         private void DrawIntegral(Graphics g)
         {
+           
             Pen pen = new Pen(Color.Red, 3);
 
             decimal interval= (B - A) / 10000;
-            List<Point> points = new List<Point>();
+            if (!new_data)
+            {
+                g.DrawLines(pen, points.ToArray());
+                return;
+            }
+            new_data = false;
+
             int prev = 100;
             int maxN = 0;
+            string selected = comboBoxParam.SelectedItem.ToString();
             for (decimal peremennaya = A; peremennaya <= B; peremennaya += interval)
             {
                 int X = GetXPixel(peremennaya);
                 if (X == prev)
                     continue;
-                if (comboBoxParam.SelectedItem.ToString() == "α")
+                if (selected == "α")
                     alpha = peremennaya;
 
-                if (comboBoxParam.SelectedItem.ToString() == "β")
+                if (selected == "β")
                     bettah = peremennaya;
 
-                if (comboBoxParam.SelectedItem.ToString() == "γ")
+                if (selected == "γ")
                     gamma = peremennaya;
 
-                if (comboBoxParam.SelectedItem.ToString() == "ε")
+                if (selected == "ε")
                     epsilon = peremennaya;
 
-
-
-            
                 prev = X;
 
-                int l=N, r = 500;
+                int l=N, r = 10000;
                 
-               while (l < r - 1)
+                while (l < r - 1)
                 {
                    
                     int m = (r+l)/2;
@@ -215,11 +238,38 @@ namespace CM_Laba1
                         l = m;
                 }
 
-                int Y = GetYPixel(Tochno(l));
+                //int Y = GetYPixel(Tochno(l));
                 maxN = Math.Max(maxN, l);
+               // points.Add(new Point(X, Y));
+            }
+
+
+            label23.Text = "-Nmax="+maxN;
+
+            for (decimal peremennaya = A; peremennaya <= B; peremennaya += interval)
+            {
+                int X = GetXPixel(peremennaya);
+                if (X == prev)
+                    continue;
+                if (selected == "α")
+                    alpha = peremennaya;
+
+                if (selected == "β")
+                    bettah = peremennaya;
+
+                if (selected == "γ")
+                    gamma = peremennaya;
+
+                if (selected == "ε")
+                    epsilon = peremennaya;
+
+                prev = X;
+
+              
+                int Y = GetYPixel(Tochno(maxN));
                 points.Add(new Point(X, Y));
             }
-            label23.Text = "-Nmax="+maxN;
+
             g.DrawLines(pen, points.ToArray());
         }
 
